@@ -1,0 +1,142 @@
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "restaurant";
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+
+
+
+
+
+// Connexion à la base de données
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    echo "Connection established successfully. <br>";
+
+}
+
+
+
+
+
+
+$yasmine="SELECT *  FROM allrest WHERE ID= 1";
+$result1= mysqli_query($conn,$yasmine);
+while ($row =mysqli_fetch_assoc($result1))
+    {
+      echo '<h2> '. $row["name"] .'</h2> ';
+      echo '<img src="' . $row["image"] . '" alt="Image" />';
+      echo '<p> '. $row["Description"] .'<br></p> ';
+      echo '<p> '. $row["categorie"] .'<br></p> ';
+      echo '<p> '. $row["place"] .'<br></p> ';
+    
+
+    }
+
+
+$maroua="SELECT *  FROM allrest WHERE ID= 2";
+$result2= mysqli_query($conn,$maroua);
+while ($row =mysqli_fetch_assoc($result2))
+    {
+      echo '<h2> '. $row["name"] .'</h2> ';
+      echo '<img src="' . $row["image"] . '" alt="Image" />';
+      echo '<p> '. $row["Description"] .'<br></p> ';
+      echo '<p> '. $row["categorie"] .'<br></p> ';
+      echo '<p> '. $row["place"] .'<br></p> ';
+
+    }
+
+
+
+    $manel="SELECT *  FROM allrest WHERE ID= 3";
+$result0= mysqli_query($conn,$manel);
+while ($row =mysqli_fetch_assoc($result0))
+    {
+      echo '<h2> '. $row["name"] .'</h2> ';
+      echo '<img src="' . $row["image"] . '" alt="Image" />';
+      echo '<p> '. $row["Description"] .'<br></p> ';
+      echo '<p> '. $row["categorie"] .'<br></p> ';
+      echo '<p> '. $row["place"] .'<br></p> ';
+
+    }
+
+$amina="SELECT *  FROM allrest WHERE ID= 4";
+$result3= mysqli_query($conn,$amina);
+while ($row =mysqli_fetch_assoc($result3))
+    {
+      echo '<h2> '. $row["name"] .'</h2> ';
+      echo '<img src="' . $row["image"] . '" alt="Image" />';
+      echo '<p> '. $row["Description"] .'<br></p> ';
+      echo '<p> '. $row["categorie"] .'<br></p> ';
+      echo '<p> '. $row["place"] .'<br></p> ';
+
+    }
+
+$safa="SELECT *  FROM allrest WHERE ID= 5";
+$result4= mysqli_query($conn,$safa);
+while ($row =mysqli_fetch_assoc($result4))
+    {
+      echo '<h2> '. $row["name"] .'</h2> ';
+      echo '<img src="' . $row["image"] . '" alt="Image" />';
+      echo '<p> '. $row["Description"] .'<br></p> ';
+      echo '<p> '. $row["categorie"] .'<br></p> ';
+      echo '<p> '. $row["place"] .'<br></p> ';
+
+    }
+
+   
+
+
+
+
+session_start();
+
+if (isset($_SESSION["id_of_allrest"])) {
+    echo "This is a session value: " . $_SESSION["id_of_allrest"];
+}
+
+if (isset($_POST["valid"])) {
+    $nm = $_POST["namee"];
+    $plc = $_POST["place"];
+    $categorie = $_POST["categorie_id"];
+
+    mysqli_query($link, "INSERT INTO allrest (name, place, categorie) VALUES ('$nm', '$plc', '$categorie')");
+
+    echo "<br>Inserted successfully<br>";
+    
+    $query = "SELECT name, place FROM allrest";
+    echo $query;
+    if ($result = mysqli_query($link, $query)) {
+        while ($row = mysqli_fetch_row($result)) {
+            echo " name: " . $row[0] . ", ";
+            echo " place: " . $row[1];
+            echo "<br>";
+        }
+        mysqli_free_result($result);
+    }
+
+    $query = "SELECT * FROM allrest";
+    $result = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($result, MYSQLI_NUM);
+    echo " name (Num): " . $row[0];
+    echo ", place (Num): " . $row[1];
+    echo "<br>";
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    echo " name (Array): " . $row["name"];
+    echo ", place (Array): " . $row["place"];
+    echo "<br>";
+
+    $query = "SELECT ID, name, categorie FROM allrest";
+    $result = mysqli_query($link, $query);
+    $rowcount = mysqli_num_rows($result);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    print_r($row);
+    echo "<br>";
+}
+
+?>
